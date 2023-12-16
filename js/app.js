@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() { //con esta formula se asegura que se descargue todo el codigo html
+
     const email = {
         email: "",
         asunto: "",
@@ -67,14 +68,14 @@ document.addEventListener("DOMContentLoaded", function() { //con esta formula se
         if(e.target.value.trim() === ""){ //muestra lo que se escribe
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
             email[e.target.name] = "";
-            comprobarEmail();
+            gestionarSubmit();
             return;
         }
 
         if(e.target.id === "email" && !validarEmail(e.target.value)){
             mostrarAlerta("El email no es válido", e.target.parentElement);
             email[e.target.name] = "";
-            comprobarEmail();
+            gestionarSubmit();
             return;
         }
 
@@ -84,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() { //con esta formula se
         email[e.target.name] = e.target.value.trim().toLowerCase();
 
         //comprobar el objeto de email
-        comprobarEmail();
+        gestionarSubmit();
 
         };
     
@@ -115,14 +116,14 @@ document.addEventListener("DOMContentLoaded", function() { //con esta formula se
         return resultado; 
     }
 
-    function comprobarEmail(){
+    function gestionarSubmit(){
         if(Object.values(email).includes("")){
             btnSubmit.classList.add("opacity-50");
-            btnSubmit.disabled = true;
+            btnSubmit.disabled = true; //desactivar
             return;
-        }
+        }        
         btnSubmit.classList.remove("opacity-50");
-        btnSubmit.disabled = false;
+        btnSubmit.disabled = false; //activar
     }
 
     function resetFormulario(){
@@ -131,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() { //con esta formula se
         email.mensaje = "";
 
         formulario.reset();
-        comprobarEmail();
+        gestionarSubmit();
     }
 
 
